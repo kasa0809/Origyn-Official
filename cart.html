@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart — ORIGYN</title>
+  <style>
+    :root { 
+      --color-bg: #f8f9fa; 
+      --color-card-bg: #ffffff; 
+      --color-border: #e0e0e0; 
+      --color-text-dark: #1a1a1a; 
+      --color-text-muted: #6c757d; 
+      --font-primary: 'Georgia', serif; 
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background-color: var(--color-bg); color: var(--color-text-dark); font-family: var(--font-primary); display: flex; min-height: 100vh; }
+    a { color: inherit; text-decoration: none; }
+
+    /* SIDEBAR */
+    aside.sidebar { width: 260px; background-color: #ffffff; border-right: 1px solid var(--color-border); padding: 30px 20px; display: flex; flex-direction: column; position: fixed; height: 100vh; z-index: 1000; }
+    .brand-logo { height: 45px; width: auto; margin-bottom: 30px; filter: invert(1); }
+    .search-input { width: 100%; padding: 10px; border: 1px solid var(--color-border); font-family: var(--font-primary); font-size: 0.85rem; outline: none; margin-bottom: 25px; }
+    .nav-links { list-style: none; display: flex; flex-direction: column; gap: 15px; }
+    .nav-links a { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: bold; }
+    .nav-links a:hover, .nav-links a.active { color: var(--color-text-muted); }
+
+    /* CONTENT AREA */
+    main.content { margin-left: 260px; flex: 1; padding: 40px; }
+    .search-results-panel { display: none; background: var(--color-card-bg); border: 1px solid var(--color-border); padding: 20px; margin-bottom: 30px; }
+    .search-results-panel.active { display: block; }
+    .search-item { padding: 10px 0; border-bottom: 1px solid var(--color-border); }
+
+    .page-title { font-size: 1.8rem; letter-spacing: 0.1em; margin-bottom: 30px; text-transform: uppercase; }
+
+    /* CART SECTION */
+    .cart-container { background-color: var(--color-card-bg); border: 1px solid var(--color-border); padding: 30px; margin-bottom: 40px; }
+    .cart-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem; }
+    .cart-table th, .cart-table td { padding: 15px 10px; border-bottom: 1px solid var(--color-border); }
+    .cart-table th { text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.8rem; color: var(--color-text-muted); }
+    .cart-item-title { font-weight: bold; }
+    .cart-item-desc { font-size: 0.8rem; color: var(--color-text-muted); }
+    .qty-input { width: 50px; padding: 5px; text-align: center; border: 1px solid var(--color-border); font-family: var(--font-primary); }
+    .remove-btn { background: none; border: none; color: var(--color-text-muted); cursor: pointer; font-size: 0.85rem; text-decoration: underline; }
+    .remove-btn:hover { color: var(--color-text-dark); }
+
+    /* CART SUMMARY */
+    .cart-summary { margin-top: 30px; display: flex; flex-direction: column; align-items: flex-end; gap: 15px; }
+    .summary-row { display: flex; justify-content: space-between; width: 300px; font-size: 0.95rem; }
+    .summary-total { font-weight: bold; font-size: 1.1rem; border-top: 1px solid var(--color-border); padding-top: 10px; }
+    .checkout-btn { background-color: var(--color-text-dark); color: #ffffff; border: none; padding: 12px 30px; font-family: var(--font-primary); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer; transition: opacity 0.2s; }
+    .checkout-btn:hover { opacity: 0.85; }
+
+    /* CONTACTS SECTION */
+    .contacts-section { margin-top: 60px; padding: 30px; background: var(--color-card-bg); border: 1px solid var(--color-border); }
+    .contacts-section h3 { font-size: 1.1rem; letter-spacing: 0.1em; margin-bottom: 15px; text-transform: uppercase; }
+    .contacts-list { list-style: none; font-size: 0.9rem; color: var(--color-text-muted); display: flex; flex-direction: column; gap: 8px; }
+
+    footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--color-border); font-size: 0.75rem; color: var(--color-text-muted); text-align: center; }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <a href="index.html"><img src="logo.png" alt="ORIGYN Logo" class="brand-logo"></a>
+    <input type="text" id="searchInput" class="search-input" placeholder="Search..." oninput="handleSearch()">
+    <ul class="nav-links">
+      <li><a href="index.html">Main Page</a></li>
+      <li><a href="hoodies.html">Hoodies</a></li>
+      <li><a href="tshirts.html">T-Shirts</a></li>
+      <li><a href="accessories.html">Bags & Accessories</a></li>
+      <li><a href="cart.html" class="active">Cart</a></li>
+    </ul>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="content">
+
+    <!-- SEARCH RESULTS PANEL -->
+    <div id="searchResultsPanel" class="search-results-panel">
+      <h3 style="margin-bottom: 15px;">Search Results</h3>
+      <div id="searchResultsList"></div>
+    </div>
+
+    <h1 class="page-title">Shopping Cart</h1>
+
+    <!-- CART CONTAINER -->
+    <div class="cart-container">
+      <table class="cart-table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="cart-item-title">Shirt Test 01</div>
+              <div class="cart-item-desc">Premium Cotton T-Shirt</div>
+            </td>
+            <td>€45.00</td>
+            <td><input type="number" class="qty-input" value="1" min="1"></td>
+            <td>€45.00</td>
+            <td><button class="remove-btn">Remove</button></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="cart-item-title">shirt test 02</div>
+              <div class="cart-item-desc">European Heavyweight Hoodie</div>
+            </td>
+            <td>€85.00</td>
+            <td><input type="number" class="qty-input" value="1" min="1"></td>
+            <td>€85.00</td>
+            <td><button class="remove-btn">Remove</button></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- SUMMARY -->
+      <div class="cart-summary">
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <span>€130.00</span>
+        </div>
+        <div class="summary-row">
+          <span>Shipping</span>
+          <span>Calculated at checkout</span>
+        </div>
+        <div class="summary-row summary-total">
+          <span>Total</span>
+          <span>€130.00</span>
+        </div>
+        <button class="checkout-btn">Proceed to Checkout</button>
+      </div>
+    </div>
+
+    <!-- CONTACTS SECTION -->
+    <section class="contacts-section">
+      <h3>Contact Us</h3>
+      <ul class="contacts-list">
+        <li><strong>Email:</strong> support@origyn.com</li>
+        <li><strong>Phone:</strong> +44 20 1234 5678</li>
+        <li><strong>Instagram:</strong> @origyn_apparel</li>
+      </ul>
+    </section>
+
+    <footer>
+      &copy; ORIGYN. All rights reserved. Made in Europe.
+    </footer>
+  </main>
+
+  <!-- SEARCH SCRIPT -->
+  <script>
+    const catalog = [
+      { name: "Shirt Test 01", category: "T-Shirts", link: "tshirts.html" },
+      { name: "shirt test 02", category: "Hoodies", link: "hoodies.html" },
+      { name: "accessory test 01", category: "Bags & Accessories", link: "accessories.html" }
+    ];
+
+    function handleSearch() {
+      const query = document.getElementById('searchInput').value.toLowerCase().trim();
+      const panel = document.getElementById('searchResultsPanel');
+      const list = document.getElementById('searchResultsList');
+
+      if (query === '') { 
+        panel.classList.remove('active'); 
+        list.innerHTML = ''; 
+        return; 
+      }
+
+      const matches = catalog.filter(item => 
+        item.name.toLowerCase().includes(query) || 
+        item.category.toLowerCase().includes(query)
+      );
+
+      panel.classList.add('active');
+
+      if (matches.length > 0) {
+        list.innerHTML = matches.map(item => 
+          `<div class="search-item"><a href="${item.link}"><strong>${item.name}</strong> — <small>${item.category}</small></a></div>`
+        ).join('');
+      } else { 
+        list.innerHTML = '<p class="search-item">No items found.</p>'; 
+      }
+    }
+  </script>
+</body>
+</html>
