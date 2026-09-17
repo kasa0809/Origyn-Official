@@ -28,6 +28,10 @@
     .card:hover { border-color: var(--color-text-dark); transform: translateY(-2px); }
     .card h3 { font-size: 1.1rem; margin-bottom: 8px; }
     .card p { font-size: 0.85rem; color: var(--color-text-muted); }
+    .contacts-section { margin-top: 60px; padding: 30px; background: var(--color-card-bg); border: 1px solid var(--color-border); }
+    .contacts-section h3 { font-size: 1.1rem; letter-spacing: 0.1em; margin-bottom: 15px; text-transform: uppercase; }
+    .contacts-list { list-style: none; font-size: 0.9rem; color: var(--color-text-muted); display: flex; flex-direction: column; gap: 8px; }
+    footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--color-border); font-size: 0.75rem; color: var(--color-text-muted); text-align: center; }
   </style>
 </head>
 <body>
@@ -58,6 +62,20 @@
         <a href="accessories.html" class="card"><h3>Bags & Accessories</h3><p>Essential Gear</p></a>
       </div>
     </section>
+
+    <!-- CONTACTS SECTION -->
+    <section class="contacts-section">
+      <h3>Contact Us</h3>
+      <ul class="contacts-list">
+        <li><strong>Email:</strong> support@origyn.com</li>
+        <li><strong>Phone:</strong> +44 20 1234 5678</li>
+        <li><strong>Instagram:</strong> @origyn_apparel</li>
+      </ul>
+    </section>
+
+    <footer>
+      &copy; ORIGYN. All rights reserved. Made in Europe.
+    </footer>
   </main>
   <script>
     const catalog = [
