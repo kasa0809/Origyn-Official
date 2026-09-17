@@ -5,201 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ORIGYN — European Apparel</title>
   <style>
-    :root {
-      --color-bg: #f8f9fa;
-      --color-card-bg: #ffffff;
-      --color-border: #e0e0e0;
-      --color-text-dark: #1a1a1a;
-      --color-text-muted: #6c757d;
-      --font-primary: 'Georgia', serif;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      background-color: var(--color-bg);
-      color: var(--color-text-dark);
-      font-family: var(--font-primary);
-      display: flex;
-      min-height: 100vh;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    /* Left Sidebar Navigation */
-    aside.sidebar {
-      width: 260px;
-      background-color: #ffffff;
-      border-right: 1px solid var(--color-border);
-      padding: 30px 20px;
-      display: flex;
-      flex-direction: column;
-      position: fixed;
-      height: 100vh;
-      z-index: 1000;
-    }
-
-    .brand-logo {
-      height: 45px;
-      width: auto;
-      margin-bottom: 30px;
-      filter: invert(1);
-    }
-
-    .search-container {
-      margin-bottom: 25px;
-      position: relative;
-    }
-
-    .search-input {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid var(--color-border);
-      font-family: var(--font-primary);
-      font-size: 0.85rem;
-      outline: none;
-    }
-
-    .search-input:focus {
-      border-color: var(--color-text-dark);
-    }
-
-    .nav-links {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    .nav-links a {
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      font-weight: bold;
-      transition: color 0.2s;
-    }
-
-    .nav-links a:hover, .nav-links a.active {
-      color: var(--color-text-muted);
-    }
-
-    /* Main Content Area */
-    main.content {
-      margin-left: 260px;
-      flex: 1;
-      padding: 40px;
-    }
-
-    /* Search Results Modal Overlay */
-    .search-results-panel {
-      display: none;
-      background: var(--color-card-bg);
-      border: 1px solid var(--color-border);
-      padding: 20px;
-      margin-bottom: 30px;
-    }
-
-    .search-results-panel.active {
-      display: block;
-    }
-
-    .search-item {
-      padding: 10px 0;
-      border-bottom: 1px solid var(--color-border);
-    }
-
-    /* Hero Section */
-    .hero {
-      background-color: #ffffff;
-      border: 1px solid var(--color-border);
-      padding: 60px 40px;
-      text-align: center;
-      margin-bottom: 40px;
-    }
-
-    .hero-logo {
-      max-width: 200px;
-      height: auto;
-      margin-bottom: 15px;
-      filter: invert(1);
-    }
-
-    .hero-tagline {
-      font-size: 1.1rem;
-      letter-spacing: 0.15em;
-      color: var(--color-text-muted);
-      text-transform: uppercase;
-    }
-
-    /* Grid Layout */
-    .section-title {
-      font-size: 1.3rem;
-      letter-spacing: 0.1em;
-      margin-bottom: 20px;
-      text-transform: uppercase;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 20px;
-    }
-
-    .card {
-      background-color: var(--color-card-bg);
-      border: 1px solid var(--color-border);
-      padding: 30px 20px;
-      transition: all 0.3s ease;
-      display: block;
-    }
-
-    .card:hover {
-      border-color: var(--color-text-dark);
-      transform: translateY(-2px);
-    }
-
-    .card h3 {
-      font-size: 1.1rem;
-      margin-bottom: 8px;
-    }
-
-    .card p {
-      font-size: 0.85rem;
-      color: var(--color-text-muted);
-    }
-
-    /* Footer */
-    footer {
-      margin-top: 60px;
-      padding-top: 20px;
-      border-top: 1px solid var(--color-border);
-      font-size: 0.75rem;
-      color: var(--color-text-muted);
-      text-align: center;
-    }
+    :root { --color-bg: #f8f9fa; --color-card-bg: #ffffff; --color-border: #e0e0e0; --color-text-dark: #1a1a1a; --color-text-muted: #6c757d; --font-primary: 'Georgia', serif; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background-color: var(--color-bg); color: var(--color-text-dark); font-family: var(--font-primary); display: flex; min-height: 100vh; }
+    a { color: inherit; text-decoration: none; }
+    aside.sidebar { width: 260px; background-color: #ffffff; border-right: 1px solid var(--color-border); padding: 30px 20px; display: flex; flex-direction: column; position: fixed; height: 100vh; z-index: 1000; }
+    .brand-logo { height: 45px; width: auto; margin-bottom: 30px; filter: invert(1); }
+    .search-input { width: 100%; padding: 10px; border: 1px solid var(--color-border); font-family: var(--font-primary); font-size: 0.85rem; outline: none; margin-bottom: 25px; }
+    .nav-links { list-style: none; display: flex; flex-direction: column; gap: 15px; }
+    .nav-links a { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: bold; }
+    .nav-links a:hover, .nav-links a.active { color: var(--color-text-muted); }
+    main.content { margin-left: 260px; flex: 1; padding: 40px; }
+    .search-results-panel { display: none; background: var(--color-card-bg); border: 1px solid var(--color-border); padding: 20px; margin-bottom: 30px; }
+    .search-results-panel.active { display: block; }
+    .search-item { padding: 10px 0; border-bottom: 1px solid var(--color-border); }
+    .hero { background-color: #ffffff; border: 1px solid var(--color-border); padding: 60px 40px; text-align: center; margin-bottom: 40px; }
+    .hero-logo { max-width: 200px; height: auto; margin-bottom: 15px; filter: invert(1); }
+    .hero-tagline { font-size: 1.1rem; letter-spacing: 0.15em; color: var(--color-text-muted); text-transform: uppercase; }
+    .section-title { font-size: 1.3rem; letter-spacing: 0.1em; margin-bottom: 20px; text-transform: uppercase; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+    .card { background-color: var(--color-card-bg); border: 1px solid var(--color-border); padding: 30px 20px; transition: all 0.3s ease; display: block; }
+    .card:hover { border-color: var(--color-text-dark); transform: translateY(-2px); }
+    .card h3 { font-size: 1.1rem; margin-bottom: 8px; }
+    .card p { font-size: 0.85rem; color: var(--color-text-muted); }
   </style>
 </head>
 <body>
-
-  <!-- LEFT SIDEBAR MENU -->
   <aside class="sidebar">
-    <a href="index.html">
-      <img src="logo.png" alt="ORIGYN Logo" class="brand-logo">
-    </a>
-
-    <!-- LIVE SEARCH -->
-    <div class="search-container">
-      <input type="text" id="searchInput" class="search-input" placeholder="Search..." oninput="handleSearch()">
-    </div>
-
-    <!-- NAVIGATION LINKS -->
+    <a href="index.html"><img src="logo.png" alt="ORIGYN Logo" class="brand-logo"></a>
+    <input type="text" id="searchInput" class="search-input" placeholder="Search..." oninput="handleSearch()">
     <ul class="nav-links">
       <li><a href="index.html" class="active">Main Page</a></li>
       <li><a href="hoodies.html">Hoodies</a></li>
@@ -207,77 +41,40 @@
       <li><a href="accessories.html">Bags & Accessories</a></li>
     </ul>
   </aside>
-
-  <!-- MAIN CONTENT AREA -->
   <main class="content">
-    
-    <!-- SEARCH RESULTS DISPLAY PANEL -->
     <div id="searchResultsPanel" class="search-results-panel">
       <h3 class="section-title">Search Results</h3>
       <div id="searchResultsList"></div>
     </div>
-
-    <!-- HERO SECTION -->
     <section class="hero">
       <img src="logo.png" alt="ORIGYN" class="hero-logo">
       <p class="hero-tagline">No Limits.</p>
     </section>
-
-    <!-- FEATURED CATEGORIES -->
     <section>
       <h2 class="section-title">Categories</h2>
       <div class="grid">
-        <a href="hoodies.html" class="card">
-          <h3>Hoodies</h3>
-          <p>European Crafted Cotton</p>
-        </a>
-        <a href="tshirts.html" class="card">
-          <h3>T-Shirts</h3>
-          <p>Everyday Basics</p>
-        </a>
-        <a href="accessories.html" class="card">
-          <h3>Bags & Accessories</h3>
-          <p>Essential Gear</p>
-        </a>
+        <a href="hoodies.html" class="card"><h3>Hoodies</h3><p>European Crafted Cotton</p></a>
+        <a href="tshirts.html" class="card"><h3>T-Shirts</h3><p>Everyday Basics</p></a>
+        <a href="accessories.html" class="card"><h3>Bags & Accessories</h3><p>Essential Gear</p></a>
       </div>
     </section>
-
-    <footer>
-      &copy; ORIGYN. All rights reserved. Made in Europe.
-    </footer>
   </main>
-
   <script>
-    // Product catalog for live search across all pages
     const catalog = [
       { name: "Shirt Test 01", category: "T-Shirts", link: "tshirts.html" },
       { name: "shirt test 02", category: "Hoodies", link: "hoodies.html" },
       { name: "accessory test 01", category: "Bags & Accessories", link: "accessories.html" }
     ];
-
     function handleSearch() {
       const query = document.getElementById('searchInput').value.toLowerCase().trim();
       const panel = document.getElementById('searchResultsPanel');
       const list = document.getElementById('searchResultsList');
-
-      if (query === '') {
-        panel.classList.remove('active');
-        list.innerHTML = '';
-        return;
-      }
-
+      if (query === '') { panel.classList.remove('active'); list.innerHTML = ''; return; }
       const matches = catalog.filter(item => item.name.toLowerCase().includes(query) || item.category.toLowerCase().includes(query));
-
       panel.classList.add('active');
       if (matches.length > 0) {
-        list.innerHTML = matches.map(item => `
-          <div class="search-item">
-            <a href="${item.link}"><strong>${item.name}</strong> — <small>${item.category}</small></a>
-          </div>
-        `).join('');
-      } else {
-        list.innerHTML = '<p class="search-item">No items found.</p>';
-      }
+        list.innerHTML = matches.map(item => `<div class="search-item"><a href="${item.link}"><strong>${item.name}</strong> — <small>${item.category}</small></a></div>`).join('');
+      } else { list.innerHTML = '<p class="search-item">No items found.</p>'; }
     }
   </script>
 </body>
