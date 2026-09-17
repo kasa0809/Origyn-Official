@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dance Bash - アパレル・グッズ</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="logo">Dance Bash</div>
+    <nav>
+      <a href="index.html">クラス</a>
+      <a href="events.html">イベント</a>
+      <a href="merch.html">グッズ</a>
+      <a href="cart.html">🛒 カート (<span id="cart-count">0</span>)</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h2>オフィシャルアパレル & アクセサリ</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Dance Bash ロゴTシャツ</h3>
+        <p>ブランドロゴが入った綿100%のグラフィックTシャツ。</p>
+        <div class="price">$25.00</div>
+        <button class="btn-add" onclick="addToCart('m1', 'Dance Bash ロゴTシャツ', 25)">カートに追加</button>
+      </div>
+      <div class="card">
+        <h3>オーバーサイズフーディー</h3>
+        <p>カラフルなグラデーションロゴが映える黒のパーカー。</p>
+        <div class="price">$45.00</div>
+        <button class="btn-add" onclick="addToCart('m2', 'オーバーサイズフーディー', 45)">カートに追加</button>
+      </div>
+      <div class="card">
+        <h3>Dance Bash アクセサリーバッグ</h3>
+        <p>シューズや小物の収納に最適なジッパー付きポーチ。</p>
+        <div class="price">$18.00</div>
+        <button class="btn-add" onclick="addToCart('m3', 'Dance Bash アクセサリーバッグ', 18)">カートに追加</button>
+      </div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
