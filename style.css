@@ -22,16 +22,17 @@ body {
 header {
   background: linear-gradient(135deg, var(--primary), var(--secondary));
   color: var(--white);
-  padding: 20px;
+  padding: 15px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.logo {
-  font-size: 24px;
-  font-weight: 800;
-  text-transform: uppercase;
+/* ロゴ画像用スタイル */
+.logo-img {
+  height: 45px; /* お好みの高さに調整してください */
+  width: auto;
+  display: block;
 }
 
 nav a {
