@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ORIGYN — Premium European Apparel</title>
   <style>
-    /* CSS STYLES */
+    /* REVISED COLOR PALETTE (Lighter Charcoal & Light Gray Accents) */
     :root {
-      --color-black: #0a0a0a;
-      --color-white: #ffffff;
-      --color-gray-dark: #1f1f1f;
-      --color-gray-mid: #333333;
-      --color-gray-light: #888888;
-      --color-gray-bg: #f4f4f4;
+      --color-black: #121212;
+      --color-card-bg: #1e1e1e;
+      --color-border: #2d2d2d;
+      --color-white: #f8f8f8;
+      --color-gray-light: #b0b0b0;
+      --color-gray-muted: #666666;
       --font-primary: 'Georgia', serif;
     }
 
@@ -44,37 +44,26 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 40px;
-      background-color: rgba(10, 10, 10, 0.95);
-      backdrop-filter: blur(5px);
+      padding: 15px 40px;
+      background-color: rgba(18, 18, 18, 0.95);
+      backdrop-filter: blur(8px);
       z-index: 1000;
-      border-bottom: 1px solid var(--color-gray-dark);
+      border-bottom: 1px solid var(--color-border);
     }
 
     .nav-left, .nav-right {
       display: flex;
       gap: 20px;
       align-items: center;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.12em;
     }
 
-    .logo-container {
-      text-align: center;
-    }
-
-    .logo-symbol {
-      height: 40px;
+    .brand-logo-nav {
+      height: 48px;
+      width: auto;
       display: block;
-      margin: 0 auto;
-    }
-
-    .logo-text {
-      font-size: 1.4rem;
-      letter-spacing: 0.2em;
-      font-weight: normal;
-      margin-top: 4px;
     }
 
     /* Mobile Overlay Menu */
@@ -101,8 +90,9 @@
       top: 30px;
       right: 40px;
       cursor: pointer;
-      font-size: 1.2rem;
+      font-size: 1rem;
       text-transform: uppercase;
+      letter-spacing: 0.1em;
     }
 
     .menu-links {
@@ -127,38 +117,32 @@
 
     /* Hero Section */
     .hero {
-      height: 100vh;
+      min-height: 90vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding: 0 20px;
-      background: linear-gradient(180deg, rgba(10,10,10,0.6) 0%, rgba(10,10,10,1) 100%), #141414;
+      padding: 120px 20px 60px;
+      background: radial-gradient(circle at center, #242424 0%, #121212 100%);
     }
 
-    .hero-logo-large {
-      max-width: 200px;
-      margin-bottom: 20px;
-    }
-
-    .hero-title {
-      font-size: 3rem;
-      letter-spacing: 0.3em;
-      margin-bottom: 10px;
+    .hero-logo {
+      max-width: 260px;
+      height: auto;
+      margin-bottom: 25px;
     }
 
     .hero-tagline {
-      font-size: 1.2rem;
-      letter-spacing: 0.2em;
+      font-size: 1.3rem;
+      letter-spacing: 0.25em;
       color: var(--color-gray-light);
-      text-transform: uppercase;
-      margin-bottom: 30px;
+      margin-bottom: 35px;
     }
 
     .btn {
       display: inline-block;
-      padding: 12px 35px;
+      padding: 14px 40px;
       border: 1px solid var(--color-white);
       color: var(--color-white);
       text-transform: uppercase;
@@ -177,7 +161,7 @@
     /* Product Categories Grid */
     .section-title {
       text-align: center;
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       letter-spacing: 0.2em;
       margin: 80px 0 40px;
       text-transform: uppercase;
@@ -194,24 +178,25 @@
 
     .category-card {
       position: relative;
-      height: 450px;
-      background-color: var(--color-gray-dark);
-      border: 1px solid var(--color-gray-mid);
+      height: 420px;
+      background-color: var(--color-card-bg);
+      border: 1px solid var(--color-border);
       display: flex;
       align-items: flex-end;
       padding: 30px;
       overflow: hidden;
-      transition: border-color 0.3s;
+      transition: all 0.3s ease;
     }
 
     .category-card:hover {
       border-color: var(--color-white);
+      transform: translateY(-4px);
     }
 
     .category-info h3 {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       letter-spacing: 0.1em;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .category-info p {
@@ -222,31 +207,29 @@
     /* Value Proposition Section */
     .brand-values {
       text-align: center;
-      padding: 100px 20px;
+      padding: 90px 20px;
       max-width: 800px;
-      margin: 0 auto;
-      border-top: 1px solid var(--color-gray-dark);
-      border-bottom: 1px solid var(--color-gray-dark);
-      margin-top: 100px;
+      margin: 100px auto 0;
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
     }
 
     .brand-values h2 {
-      font-size: 2rem;
+      font-size: 1.8rem;
       letter-spacing: 0.2em;
       margin-bottom: 20px;
     }
 
     .brand-values p {
       color: var(--color-gray-light);
-      font-size: 1.1rem;
+      font-size: 1rem;
       line-height: 1.8;
     }
 
     /* Footer */
     footer {
       padding: 60px 40px 30px;
-      border-top: 1px solid var(--color-gray-dark);
-      margin-top: 60px;
+      margin-top: 40px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -268,20 +251,16 @@
 
     .copyright {
       font-size: 0.75rem;
-      color: var(--color-gray-mid);
+      color: var(--color-gray-muted);
       letter-spacing: 0.05em;
     }
 
-    /* Responsive Design */
     @media (max-width: 768px) {
       header {
         padding: 15px 20px;
       }
       .categories-grid {
         padding: 0 20px;
-      }
-      .hero-title {
-        font-size: 2rem;
       }
       .footer-links {
         flex-direction: column;
@@ -301,13 +280,8 @@
     </div>
     
     <div class="logo-container">
-      <!-- Embedded SVG ORG Logo Icon -->
-      <svg class="logo-symbol" viewBox="0 0 100 100" fill="white">
-        <path d="M50,10 C30,10 20,25 20,40 C20,55 30,70 50,70 C70,70 80,55 80,40 C80,25 70,10 50,10 Z M50,20 C62,20 68,30 68,40 C68,50 62,60 50,60 C38,60 32,50 32,40 C32,30 38,20 50,20 Z" />
-        <path d="M25,35 L45,35 L45,85 L35,85 L35,55 L25,55 Z" />
-        <path d="M60,50 C70,50 75,55 75,65 C75,75 70,85 55,85 C45,85 40,80 40,80 L43,72 C43,72 47,76 54,76 C62,76 65,71 65,65 C65,59 60,58 55,58 L50,58 L50,50 Z" />
-      </svg>
-      <div class="logo-text">ORIGYN</div>
+      <!-- Replace 'logo.png' with your image path -->
+      <a href="#"><img src="logo.png" alt="ORIGYN Logo" class="brand-logo-nav"></a>
     </div>
 
     <div class="nav-right">
@@ -327,8 +301,9 @@
 
   <!-- Hero Section -->
   <section class="hero">
-    <h1 class="hero-title">ORIGYN</h1>
-    <p class="hero-tagline">No Limits</p>
+    <!-- Replace 'logo.png' with your image path -->
+    <img src="logo.png" alt="ORIGYN" class="hero-logo">
+    <p class="hero-tagline">No Limits.</p>
     <a href="#collection" class="btn">Discover Collection</a>
   </section>
 
@@ -337,7 +312,6 @@
     <h2 class="section-title">Categories</h2>
     <div class="categories-grid">
       
-      <!-- Hoodies Category -->
       <a href="#" class="category-card" id="hoodies">
         <div class="category-info">
           <h3>Hoodies</h3>
@@ -345,7 +319,6 @@
         </div>
       </a>
 
-      <!-- T-Shirts Category -->
       <a href="#" class="category-card" id="tshirts">
         <div class="category-info">
           <h3>T-Shirts</h3>
@@ -353,7 +326,6 @@
         </div>
       </a>
 
-      <!-- Bags & Accessories Category -->
       <a href="#" class="category-card" id="accessories">
         <div class="category-info">
           <h3>Bags & Accessories</h3>
