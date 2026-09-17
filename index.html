@@ -3,16 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ORIGYN — Premium European Apparel</title>
+  <title>ORIGYN — European Apparel</title>
   <style>
-    /* REVISED COLOR PALETTE (Lighter Charcoal & Light Gray Accents) */
+    /* MID-RANGE LIGHT THEME PALETTE */
     :root {
-      --color-black: #121212;
-      --color-card-bg: #1e1e1e;
-      --color-border: #2d2d2d;
-      --color-white: #f8f8f8;
-      --color-gray-light: #b0b0b0;
-      --color-gray-muted: #666666;
+      --color-bg: #f8f9fa;
+      --color-card-bg: #ffffff;
+      --color-border: #e0e0e0;
+      --color-text-dark: #1a1a1a;
+      --color-text-muted: #6c757d;
       --font-primary: 'Georgia', serif;
     }
 
@@ -23,11 +22,11 @@
     }
 
     body {
-      background-color: var(--color-black);
-      color: var(--color-white);
+      background-color: var(--color-bg);
+      color: var(--color-text-dark);
       font-family: var(--font-primary);
       line-height: 1.6;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.03em;
       overflow-x: hidden;
     }
 
@@ -45,7 +44,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 15px 40px;
-      background-color: rgba(18, 18, 18, 0.95);
+      background-color: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(8px);
       z-index: 1000;
       border-bottom: 1px solid var(--color-border);
@@ -57,13 +56,16 @@
       align-items: center;
       font-size: 0.85rem;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.1em;
+      font-weight: bold;
     }
 
+    /* Inverting the black logo to work on white backgrounds */
     .brand-logo-nav {
-      height: 48px;
+      height: 44px;
       width: auto;
       display: block;
+      filter: invert(1);
     }
 
     /* Mobile Overlay Menu */
@@ -73,7 +75,7 @@
       left: 0;
       width: 100%;
       height: 100vh;
-      background: var(--color-black);
+      background: var(--color-bg);
       z-index: 2000;
       display: none;
       flex-direction: column;
@@ -101,158 +103,165 @@
     }
 
     .menu-links li {
-      margin: 25px 0;
+      margin: 20px 0;
     }
 
     .menu-links a {
-      font-size: 2rem;
+      font-size: 1.8rem;
       text-transform: uppercase;
-      letter-spacing: 0.15em;
-      transition: color 0.3s;
+      letter-spacing: 0.1em;
+      transition: color 0.2s;
     }
 
     .menu-links a:hover {
-      color: var(--color-gray-light);
+      color: var(--color-text-muted);
     }
 
     /* Hero Section */
     .hero {
-      min-height: 90vh;
+      min-height: 80vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
       padding: 120px 20px 60px;
-      background: radial-gradient(circle at center, #242424 0%, #121212 100%);
+      background-color: #f0f1f3;
     }
 
     .hero-logo {
-      max-width: 260px;
+      max-width: 240px;
       height: auto;
-      margin-bottom: 25px;
+      margin-bottom: 20px;
+      filter: invert(1); /* Inverts logo colors for light mode */
     }
 
     .hero-tagline {
-      font-size: 1.3rem;
-      letter-spacing: 0.25em;
-      color: var(--color-gray-light);
-      margin-bottom: 35px;
+      font-size: 1.2rem;
+      letter-spacing: 0.2em;
+      color: var(--color-text-muted);
+      margin-bottom: 30px;
+      text-transform: uppercase;
     }
 
     .btn {
       display: inline-block;
-      padding: 14px 40px;
-      border: 1px solid var(--color-white);
-      color: var(--color-white);
+      padding: 12px 35px;
+      border: 1px solid var(--color-text-dark);
+      color: var(--color-text-dark);
       text-transform: uppercase;
       font-size: 0.85rem;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.15em;
       transition: all 0.3s ease;
       background: transparent;
       cursor: pointer;
+      font-weight: bold;
     }
 
     .btn:hover {
-      background-color: var(--color-white);
-      color: var(--color-black);
+      background-color: var(--color-text-dark);
+      color: #ffffff;
     }
 
     /* Product Categories Grid */
     .section-title {
       text-align: center;
-      font-size: 1.6rem;
-      letter-spacing: 0.2em;
-      margin: 80px 0 40px;
+      font-size: 1.5rem;
+      letter-spacing: 0.15em;
+      margin: 60px 0 30px;
       text-transform: uppercase;
     }
 
     .categories-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
       padding: 0 40px;
-      max-width: 1400px;
+      max-width: 1300px;
       margin: 0 auto;
     }
 
     .category-card {
       position: relative;
-      height: 420px;
+      height: 380px;
       background-color: var(--color-card-bg);
       border: 1px solid var(--color-border);
       display: flex;
       align-items: flex-end;
-      padding: 30px;
+      padding: 25px;
       overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
       transition: all 0.3s ease;
     }
 
     .category-card:hover {
-      border-color: var(--color-white);
-      transform: translateY(-4px);
+      border-color: var(--color-text-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
     }
 
     .category-info h3 {
-      font-size: 1.4rem;
-      letter-spacing: 0.1em;
-      margin-bottom: 8px;
+      font-size: 1.3rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
     }
 
     .category-info p {
       font-size: 0.85rem;
-      color: var(--color-gray-light);
+      color: var(--color-text-muted);
     }
 
     /* Value Proposition Section */
     .brand-values {
       text-align: center;
-      padding: 90px 20px;
-      max-width: 800px;
-      margin: 100px auto 0;
+      padding: 70px 20px;
+      max-width: 750px;
+      margin: 80px auto 0;
       border-top: 1px solid var(--color-border);
       border-bottom: 1px solid var(--color-border);
+      background-color: var(--color-card-bg);
     }
 
     .brand-values h2 {
-      font-size: 1.8rem;
-      letter-spacing: 0.2em;
-      margin-bottom: 20px;
+      font-size: 1.5rem;
+      letter-spacing: 0.15em;
+      margin-bottom: 15px;
     }
 
     .brand-values p {
-      color: var(--color-gray-light);
-      font-size: 1rem;
-      line-height: 1.8;
+      color: var(--color-text-muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
     }
 
     /* Footer */
     footer {
-      padding: 60px 40px 30px;
+      padding: 50px 40px 30px;
       margin-top: 40px;
       display: flex;
       flex-direction: column;
       align-items: center;
+      background-color: #ffffff;
+      border-top: 1px solid var(--color-border);
     }
 
     .footer-links {
       display: flex;
-      gap: 30px;
-      margin-bottom: 40px;
-      font-size: 0.85rem;
+      gap: 25px;
+      margin-bottom: 30px;
+      font-size: 0.8rem;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      color: var(--color-gray-light);
+      color: var(--color-text-muted);
     }
 
     .footer-links a:hover {
-      color: var(--color-white);
+      color: var(--color-text-dark);
     }
 
     .copyright {
       font-size: 0.75rem;
-      color: var(--color-gray-muted);
-      letter-spacing: 0.05em;
+      color: var(--color-text-muted);
     }
 
     @media (max-width: 768px) {
@@ -265,7 +274,7 @@
       .footer-links {
         flex-direction: column;
         align-items: center;
-        gap: 15px;
+        gap: 12px;
       }
     }
   </style>
@@ -280,7 +289,6 @@
     </div>
     
     <div class="logo-container">
-      <!-- Replace 'logo.png' with your image path -->
       <a href="#"><img src="logo.png" alt="ORIGYN Logo" class="brand-logo-nav"></a>
     </div>
 
@@ -301,10 +309,9 @@
 
   <!-- Hero Section -->
   <section class="hero">
-    <!-- Replace 'logo.png' with your image path -->
     <img src="logo.png" alt="ORIGYN" class="hero-logo">
     <p class="hero-tagline">No Limits.</p>
-    <a href="#collection" class="btn">Discover Collection</a>
+    <a href="#collection" class="btn">Shop Collection</a>
   </section>
 
   <!-- Categories Section -->
@@ -315,21 +322,21 @@
       <a href="#" class="category-card" id="hoodies">
         <div class="category-info">
           <h3>Hoodies</h3>
-          <p>Heavyweight European Cotton</p>
+          <p>European Crafted Cotton</p>
         </div>
       </a>
 
       <a href="#" class="category-card" id="tshirts">
         <div class="category-info">
           <h3>T-Shirts</h3>
-          <p>Minimalist Premium Fits</p>
+          <p>Everyday Basics</p>
         </div>
       </a>
 
       <a href="#" class="category-card" id="accessories">
         <div class="category-info">
           <h3>Bags & Accessories</h3>
-          <p>Crafted for Everyday Utility</p>
+          <p>Essential Gear</p>
         </div>
       </a>
 
@@ -339,7 +346,7 @@
   <!-- Brand Values -->
   <section class="brand-values">
     <h2>MADE IN EUROPE</h2>
-    <p>Crafted with premium European materials and meticulous craftsmanship. Designed for those who push boundaries.</p>
+    <p>Quality European manufacturing combined with practical everyday design.</p>
   </section>
 
   <!-- Footer -->
