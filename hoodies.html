@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hoodies — ORIGYN</title>
   <style>
-   .product-grid { display: flex;  flex-wrap: wrap; /* ← これを追加しておくと商品が増えても自動で折り返します */gap: 20px;       /* ← ここで隙間のサイズを調整できます */}
+    .product-grid { display: flex; flex-wrap: wrap; gap: 20px; }
     :root { --color-bg: #f8f9fa; --color-card-bg: #ffffff; --color-border: #e0e0e0; --color-text-dark: #1a1a1a; --color-text-muted: #6c757d; --font-primary: 'Georgia', serif; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { background-color: var(--color-bg); color: var(--color-text-dark); font-family: var(--font-primary); display: flex; min-height: 100vh; position: relative; }
@@ -34,6 +34,10 @@
     .add-cart-btn { background-color: var(--color-text-dark); color: #ffffff; border: none; padding: 10px 20px; font-family: var(--font-primary); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer; }
     .add-cart-btn:hover { opacity: 0.85; }
 
+    /* COLOR SELECT STYLES */
+    .color-option { margin-bottom: 15px; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 0.85rem; }
+    .color-select { padding: 6px 10px; font-family: var(--font-primary); border: 1px solid var(--color-border); background-color: #ffffff; outline: none; font-size: 0.85rem; cursor: pointer; }
+
     .contacts-section { margin-top: 60px; padding: 30px; background: var(--color-card-bg); border: 1px solid var(--color-border); }
     .contacts-section h3 { font-size: 1.1rem; letter-spacing: 0.1em; margin-bottom: 15px; text-transform: uppercase; }
     .contacts-list { list-style: none; font-size: 0.9rem; color: var(--color-text-muted); display: flex; flex-direction: column; gap: 8px; }
@@ -60,20 +64,45 @@
     </div>
     <h1 class="page-title">Hoodies</h1>
 
-<div class="product-grid">
-    <div class="product-card">
-      <img src="Error.png" alt="Origyn Original Hoodie" class="product-image">
-      <h3>Origyn Original Hoodie - BK</h3>
-      <p>European Heavyweight Hoodie — €75.00</p>
-      <button class="add-cart-btn" onclick="addToCart('Origyn Original Hoodie', 75, 'European Heavyweight Hoodie')">Add to Cart</button>
+    <div class="product-grid">
+      <!-- 商品 1 -->
+      <div class="product-card">
+        <img src="Error.png" alt="Origyn Original Hoodie" class="product-image">
+        <h3>Origyn Original Hoodie - BK</h3>
+        <p>European Heavyweight Hoodie — €75.00</p>
+        
+        <!-- 色選択プルダウン -->
+        <div class="color-option">
+          <label for="color-origyn">Color:</label>
+          <select id="color-origyn" class="color-select">
+            <option value="Black">Black</option>
+            <option value="Grey">Grey</option>
+            <option value="White">White</option>
+          </select>
+        </div>
+
+        <button class="add-cart-btn" onclick="addToCart('Origyn Original Hoodie', 75, 'European Heavyweight Hoodie', 'color-origyn')">Add to Cart</button>
+      </div>
+
+      <!-- 商品 2 -->
+      <div class="product-card">
+        <img src="Error.png" alt="Color Hoodie" class="product-image">
+        <h3>Light Hoodie - BK</h3>
+        <p>Light Hoodie — €50.00</p>
+        
+        <!-- 色選択プルダウン -->
+        <div class="color-option">
+          <label for="color-light">Color:</label>
+          <select id="color-light" class="color-select">
+            <option value="Black">Black</option>
+            <option value="Navy">Navy</option>
+            <option value="Beige">Beige</option>
+          </select>
+        </div>
+
+        <button class="add-cart-btn" onclick="addToCart('Light Hoodie', 50, 'Light Hoodie', 'color-light')">Add to Cart</button>
+      </div> 
     </div>
-   <div class="product-card">
-      <img src="Error.png" alt="Color Hoodie" class="product-image">
-      <h3>Light Hoodie - BK</h3>
-      <p>Light Hoodie — €50.00</p>
-      <button class="add-cart-btn" onclick="addToCart('Color Hoodie', 50, 'Light Hoodie')">Add to Cart</button>
-    </div> 
-</div>
 
     <section class="contacts-section">
       <h3>Contact Us</h3>
@@ -96,22 +125,25 @@
       toggleBtn.textContent = body.classList.contains('sidebar-collapsed') ? '☰ Menu' : '✕ Close';
     }
 
-    function addToCart(name, price, desc) {
+    function addToCart(name, price, desc, selectId) {
+      const selectedColor = document.getElementById(selectId).value;
+      const fullName = `${name} (${selectedColor})`; // 商品名に色を追加（例: Light Hoodie (Black)）
+
       let cart = JSON.parse(localStorage.getItem('origyn_cart')) || [];
-      const existing = cart.find(item => item.name === name);
+      const existing = cart.find(item => item.name === fullName);
       if (existing) {
         existing.quantity += 1;
       } else {
-        cart.push({ name, price, desc, quantity: 1 });
+        cart.push({ name: fullName, price, desc, quantity: 1 });
       }
       localStorage.setItem('origyn_cart', JSON.stringify(cart));
-      alert(`${name} has been added to your cart.`);
+      alert(`${fullName} has been added to your cart.`);
     }
 
     const catalog = [
       { name: "Shirt Test 01", category: "T-Shirts", link: "tshirts.html" },
       { name: "Origyn Original Hoodie", category: "Hoodies", link: "hoodies.html" },
-      { name: "Color Hoodie", category: "Hoodies", link: "hoodies.html" },
+      { name: "Light Hoodie", category: "Hoodies", link: "hoodies.html" },
       { name: "accessory test 01", category: "Bags & Accessories", link: "accessories.html" }
     ];
     function handleSearch() {
