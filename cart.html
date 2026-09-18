@@ -34,9 +34,7 @@
       box-shadow: 0 2px 5px rgba(0,0,0,0.05);
       transition: background-color 0.2s ease;
     }
-    .sidebar-toggle-btn:hover {
-      background-color: var(--color-bg);
-    }
+    .sidebar-toggle-btn:hover { background-color: var(--color-bg); }
 
     /* SIDEBAR */
     aside.sidebar { 
@@ -48,16 +46,12 @@
       flex-direction: column; 
       position: fixed; 
       height: 100vh; 
-      z-index: 1000;
+      z-index: 1000; 
       top: 0;
       left: 0;
       transition: transform 0.3s ease;
     }
-
-    /* 非表示状態のCSS */
-    body.sidebar-collapsed aside.sidebar {
-      transform: translateX(-100%);
-    }
+    body.sidebar-collapsed aside.sidebar { transform: translateX(-100%); }
 
     .brand-logo { height: 45px; width: auto; margin-bottom: 30px; filter: invert(1); }
     .search-input { width: 100%; padding: 10px; border: 1px solid var(--color-border); font-family: var(--font-primary); font-size: 0.85rem; outline: none; margin-bottom: 25px; }
@@ -72,12 +66,7 @@
       padding: 40px; 
       transition: margin-left 0.3s ease;
     }
-
-    /* サイドバー非表示時のメインエリア調整 */
-    body.sidebar-collapsed main.content {
-      margin-left: 0;
-      padding-top: 60px;
-    }
+    body.sidebar-collapsed main.content { margin-left: 0; padding-top: 60px; }
 
     .search-results-panel { display: none; background: var(--color-card-bg); border: 1px solid var(--color-border); padding: 20px; margin-bottom: 30px; }
     .search-results-panel.active { display: block; }
@@ -95,6 +84,7 @@
     .qty-input { width: 50px; padding: 5px; text-align: center; border: 1px solid var(--color-border); font-family: var(--font-primary); }
     .remove-btn { background: none; border: none; color: var(--color-text-muted); cursor: pointer; font-size: 0.85rem; text-decoration: underline; }
     .remove-btn:hover { color: var(--color-text-dark); }
+    .empty-msg { text-align: center; color: var(--color-text-muted); padding: 20px 0; }
 
     /* CART SUMMARY */
     .cart-summary { margin-top: 30px; display: flex; flex-direction: column; align-items: flex-end; gap: 15px; }
@@ -117,7 +107,7 @@
   <button id="toggleBtn" class="sidebar-toggle-btn" onclick="toggleSidebar()">✕ Close</button>
 
   <!-- SIDEBAR -->
-  <aside class="sidebar" id="sidebar">
+  <aside class="sidebar">
     <a href="index.html"><img src="logo.png" alt="ORIGYN Logo" class="brand-logo"></a>
     <input type="text" id="searchInput" class="search-input" placeholder="Search..." oninput="handleSearch()">
     <ul class="nav-links">
@@ -152,27 +142,8 @@
             <th></th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>
-              <div class="cart-item-title">Shirt Test 01</div>
-              <div class="cart-item-desc">Premium Cotton T-Shirt</div>
-            </td>
-            <td>€45.00</td>
-            <td><input type="number" class="qty-input" value="1" min="1"></td>
-            <td>€45.00</td>
-            <td><button class="remove-btn">Remove</button></td>
-          </tr>
-          <tr>
-            <td>
-              <div class="cart-item-title">shirt test 02</div>
-              <div class="cart-item-desc">European Heavyweight Hoodie</div>
-            </td>
-            <td>€85.00</td>
-            <td><input type="number" class="qty-input" value="1" min="1"></td>
-            <td>€85.00</td>
-            <td><button class="remove-btn">Remove</button></td>
-          </tr>
+        <tbody id="cartTableBody">
+          <!-- JSで動的に表示 -->
         </tbody>
       </table>
 
@@ -180,7 +151,7 @@
       <div class="cart-summary">
         <div class="summary-row">
           <span>Subtotal</span>
-          <span>€130.00</span>
+          <span id="subtotalVal">€0.00</span>
         </div>
         <div class="summary-row">
           <span>Shipping</span>
@@ -188,7 +159,7 @@
         </div>
         <div class="summary-row summary-total">
           <span>Total</span>
-          <span>€130.00</span>
+          <span id="totalVal">€0.00</span>
         </div>
         <button class="checkout-btn">Proceed to Checkout</button>
       </div>
@@ -210,20 +181,79 @@
   </main>
 
   <script>
-    /* SIDEBAR TOGGLE FUNCTION */
     function toggleSidebar() {
       const body = document.body;
       const toggleBtn = document.getElementById('toggleBtn');
       body.classList.toggle('sidebar-collapsed');
-
-      if (body.classList.contains('sidebar-collapsed')) {
-        toggleBtn.textContent = '☰ Menu';
-      } else {
-        toggleBtn.textContent = '✕ Close';
-      }
+      toggleBtn.textContent = body.classList.contains('sidebar-collapsed') ? '☰ Menu' : '✕ Close';
     }
 
-    /* SEARCH FUNCTION */
+    /* CART LOGIC */
+    function getCart() {
+      return JSON.parse(localStorage.getItem('origyn_cart')) || [];
+    }
+
+    function saveCart(cart) {
+      localStorage.setItem('origyn_cart', JSON.stringify(cart));
+      renderCart();
+    }
+
+    function updateQuantity(index, quantity) {
+      let cart = getCart();
+      const qty = parseInt(quantity, 10);
+      if (qty > 0) {
+        cart[index].quantity = qty;
+      }
+      saveCart(cart);
+    }
+
+    function removeItem(index) {
+      let cart = getCart();
+      cart.splice(index, 1);
+      saveCart(cart);
+    }
+
+    function renderCart() {
+      const cart = getCart();
+      const tbody = document.getElementById('cartTableBody');
+      const subtotalVal = document.getElementById('subtotalVal');
+      const totalVal = document.getElementById('totalVal');
+
+      if (cart.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" class="empty-msg">Your cart is empty.</td></tr>';
+        subtotalVal.textContent = '€0.00';
+        totalVal.textContent = '€0.00';
+        return;
+      }
+
+      let total = 0;
+      tbody.innerHTML = cart.map((item, index) => {
+        const itemTotal = item.price * item.quantity;
+        total += itemTotal;
+        return `
+          <tr>
+            <td>
+              <div class="cart-item-title">${item.name}</div>
+              <div class="cart-item-desc">${item.desc || ''}</div>
+            </td>
+            <td>€${item.price.toFixed(2)}</td>
+            <td>
+              <input type="number" class="qty-input" value="${item.quantity}" min="1" onchange="updateQuantity(${index}, this.value)">
+            </td>
+            <td>€${itemTotal.toFixed(2)}</td>
+            <td><button class="remove-btn" onclick="removeItem(${index})">Remove</button></td>
+          </tr>
+        `;
+      }).join('');
+
+      subtotalVal.textContent = `€${total.toFixed(2)}`;
+      totalVal.textContent = `€${total.toFixed(2)}`;
+    }
+
+    // 初回表示
+    document.addEventListener('DOMContentLoaded', renderCart);
+
+    /* SEARCH LOGIC */
     const catalog = [
       { name: "Shirt Test 01", category: "T-Shirts", link: "tshirts.html" },
       { name: "shirt test 02", category: "Hoodies", link: "hoodies.html" },
