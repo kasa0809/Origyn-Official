@@ -14,11 +14,51 @@
       --font-primary: 'Georgia', serif; 
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background-color: var(--color-bg); color: var(--color-text-dark); font-family: var(--font-primary); display: flex; min-height: 100vh; }
+    body { background-color: var(--color-bg); color: var(--color-text-dark); font-family: var(--font-primary); display: flex; min-height: 100vh; position: relative; }
     a { color: inherit; text-decoration: none; }
 
+    /* TOGGLE BUTTON */
+    .sidebar-toggle-btn {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      z-index: 1100;
+      background-color: var(--color-card-bg);
+      border: 1px solid var(--color-border);
+      padding: 8px 12px;
+      font-family: var(--font-primary);
+      font-size: 0.85rem;
+      cursor: pointer;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      transition: background-color 0.2s ease;
+    }
+    .sidebar-toggle-btn:hover {
+      background-color: var(--color-bg);
+    }
+
     /* SIDEBAR */
-    aside.sidebar { width: 260px; background-color: #ffffff; border-right: 1px solid var(--color-border); padding: 30px 20px; display: flex; flex-direction: column; position: fixed; height: 100vh; z-index: 1000; }
+    aside.sidebar { 
+      width: 260px; 
+      background-color: #ffffff; 
+      border-right: 1px solid var(--color-border); 
+      padding: 70px 20px 30px 20px; 
+      display: flex; 
+      flex-direction: column; 
+      position: fixed; 
+      height: 100vh; 
+      z-index: 1000;
+      top: 0;
+      left: 0;
+      transition: transform 0.3s ease;
+    }
+
+    /* 非表示状態のCSS */
+    body.sidebar-collapsed aside.sidebar {
+      transform: translateX(-100%);
+    }
+
     .brand-logo { height: 45px; width: auto; margin-bottom: 30px; filter: invert(1); }
     .search-input { width: 100%; padding: 10px; border: 1px solid var(--color-border); font-family: var(--font-primary); font-size: 0.85rem; outline: none; margin-bottom: 25px; }
     .nav-links { list-style: none; display: flex; flex-direction: column; gap: 15px; }
@@ -26,7 +66,19 @@
     .nav-links a:hover, .nav-links a.active { color: var(--color-text-muted); }
 
     /* CONTENT AREA */
-    main.content { margin-left: 260px; flex: 1; padding: 40px; }
+    main.content { 
+      margin-left: 260px; 
+      flex: 1; 
+      padding: 40px; 
+      transition: margin-left 0.3s ease;
+    }
+
+    /* サイドバー非表示時のメインエリア調整 */
+    body.sidebar-collapsed main.content {
+      margin-left: 0;
+      padding-top: 60px;
+    }
+
     .search-results-panel { display: none; background: var(--color-card-bg); border: 1px solid var(--color-border); padding: 20px; margin-bottom: 30px; }
     .search-results-panel.active { display: block; }
     .search-item { padding: 10px 0; border-bottom: 1px solid var(--color-border); }
@@ -61,8 +113,11 @@
 </head>
 <body>
 
+  <!-- TOGGLE BUTTON -->
+  <button id="toggleBtn" class="sidebar-toggle-btn" onclick="toggleSidebar()">✕ Close</button>
+
   <!-- SIDEBAR -->
-  <aside class="sidebar">
+  <aside class="sidebar" id="sidebar">
     <a href="index.html"><img src="logo.png" alt="ORIGYN Logo" class="brand-logo"></a>
     <input type="text" id="searchInput" class="search-input" placeholder="Search..." oninput="handleSearch()">
     <ul class="nav-links">
@@ -154,8 +209,21 @@
     </footer>
   </main>
 
-  <!-- SEARCH SCRIPT -->
   <script>
+    /* SIDEBAR TOGGLE FUNCTION */
+    function toggleSidebar() {
+      const body = document.body;
+      const toggleBtn = document.getElementById('toggleBtn');
+      body.classList.toggle('sidebar-collapsed');
+
+      if (body.classList.contains('sidebar-collapsed')) {
+        toggleBtn.textContent = '☰ Menu';
+      } else {
+        toggleBtn.textContent = '✕ Close';
+      }
+    }
+
+    /* SEARCH FUNCTION */
     const catalog = [
       { name: "Shirt Test 01", category: "T-Shirts", link: "tshirts.html" },
       { name: "shirt test 02", category: "Hoodies", link: "hoodies.html" },
