@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>T-Shirts — ORIGYN</title>
   <style>
+    .product-grid { display: flex; flex-wrap: wrap; gap: 20px; }
     :root { --color-bg: #f8f9fa; --color-card-bg: #ffffff; --color-border: #e0e0e0; --color-text-dark: #1a1a1a; --color-text-muted: #6c757d; --font-primary: 'Georgia', serif; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { background-color: var(--color-bg); color: var(--color-text-dark); font-family: var(--font-primary); display: flex; min-height: 100vh; position: relative; }
@@ -33,6 +34,10 @@
     .add-cart-btn { background-color: var(--color-text-dark); color: #ffffff; border: none; padding: 10px 20px; font-family: var(--font-primary); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer; }
     .add-cart-btn:hover { opacity: 0.85; }
 
+    /* COLOR SELECT STYLES */
+    .color-option { margin-bottom: 15px; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 0.85rem; }
+    .color-select { padding: 6px 10px; font-family: var(--font-primary); border: 1px solid var(--color-border); background-color: #ffffff; outline: none; font-size: 0.85rem; cursor: pointer; }
+
     .contacts-section { margin-top: 60px; padding: 30px; background: var(--color-card-bg); border: 1px solid var(--color-border); }
     .contacts-section h3 { font-size: 1.1rem; letter-spacing: 0.1em; margin-bottom: 15px; text-transform: uppercase; }
     .contacts-list { list-style: none; font-size: 0.9rem; color: var(--color-text-muted); display: flex; flex-direction: column; gap: 8px; }
@@ -59,11 +64,24 @@
     </div>
     <h1 class="page-title">T-Shirts</h1>
     
-    <div class="product-card">
-      <img src="Error.png" alt="Shirt Test 01" class="product-image">
-      <h3>Shirt Test 01</h3>
-      <p>Premium Cotton T-Shirt — €45.00</p>
-      <button class="add-cart-btn" onclick="addToCart('Shirt Test 01', 45, 'Premium Cotton T-Shirt')">Add to Cart</button>
+    <div class="product-grid">
+      <div class="product-card">
+        <img src="Error.png" alt="Shirt Test 01" class="product-image">
+        <h3>Shirt Test 01</h3>
+        <p>Premium Cotton T-Shirt — €45.00</p>
+        
+        <!-- 色選択プルダウン -->
+        <div class="color-option">
+          <label for="color-shirt01">Color:</label>
+          <select id="color-shirt01" class="color-select">
+            <option value="White">White</option>
+            <option value="Black">Black</option>
+            <option value="Navy">Navy</option>
+          </select>
+        </div>
+
+        <button class="add-cart-btn" onclick="addToCart('Shirt Test 01', 45, 'Premium Cotton T-Shirt', 'color-shirt01')">Add to Cart</button>
+      </div>
     </div>
 
     <section class="contacts-section">
@@ -87,16 +105,19 @@
       toggleBtn.textContent = body.classList.contains('sidebar-collapsed') ? '☰ Menu' : '✕ Close';
     }
 
-    function addToCart(name, price, desc) {
+    function addToCart(name, price, desc, selectId) {
+      const selectedColor = document.getElementById(selectId).value;
+      const fullName = `${name} (${selectedColor})`;
+
       let cart = JSON.parse(localStorage.getItem('origyn_cart')) || [];
-      const existing = cart.find(item => item.name === name);
+      const existing = cart.find(item => item.name === fullName);
       if (existing) {
         existing.quantity += 1;
       } else {
-        cart.push({ name, price, desc, quantity: 1 });
+        cart.push({ name: fullName, price, desc, quantity: 1 });
       }
       localStorage.setItem('origyn_cart', JSON.stringify(cart));
-      alert(`${name} has been added to your cart.`);
+      alert(`${fullName} has been added to your cart.`);
     }
 
     const catalog = [
