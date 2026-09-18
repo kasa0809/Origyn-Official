@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hoodies — ORIGYN</title>
   <style>
+   .product-grid { display: flex;  flex-wrap: wrap; /* ← これを追加しておくと商品が増えても自動で折り返します */gap: 20px;       /* ← ここで隙間のサイズを調整できます */}
     :root { --color-bg: #f8f9fa; --color-card-bg: #ffffff; --color-border: #e0e0e0; --color-text-dark: #1a1a1a; --color-text-muted: #6c757d; --font-primary: 'Georgia', serif; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { background-color: var(--color-bg); color: var(--color-text-dark); font-family: var(--font-primary); display: flex; min-height: 100vh; position: relative; }
@@ -66,6 +67,12 @@
       <p>European Heavyweight Hoodie — €85.00</p>
       <button class="add-cart-btn" onclick="addToCart('Origyn Original Hoodie', 85, 'European Heavyweight Hoodie')">Add to Cart</button>
     </div>
+   <div class="product-card">
+      <img src="Error.png" alt="Color Hoodie" class="product-image">
+      <h3>Color Hoodie</h3>
+      <p>Light Hoodie — €85.00</p>
+      <button class="add-cart-btn" onclick="addToCart('Color Hoodie', 85, 'Light Hoodie')">Add to Cart</button>
+    </div> 
 </div>
 
     <section class="contacts-section">
@@ -104,6 +111,7 @@
     const catalog = [
       { name: "Shirt Test 01", category: "T-Shirts", link: "tshirts.html" },
       { name: "Origyn Original Hoodie", category: "Hoodies", link: "hoodies.html" },
+      { name: "Color Hoodie", category: "Hoodies", link: "hoodies.html" },
       { name: "accessory test 01", category: "Bags & Accessories", link: "accessories.html" }
     ];
     function handleSearch() {
